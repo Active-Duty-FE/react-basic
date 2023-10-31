@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="test"></div>
+  <script type="text/javascript" src="../../js/react.development.js"></script>
+  <script type="text/javascript" src="../../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../../js/babel.min.js"></script>
+  <script type="text/babel">
+    class Person extends React.Component {
+      state = {
+        userId:'',
+        userPassword:''
+      }
+      render(){
+        return (
+          <div>
+            <form onSubmit={this.submitForm}>
+              账号：<input onChange={this.saveData1} type="text"/>
+              密码：<input onChange={this.saveData2} type="password"/>
+              <input type="submit" value="Submit"/>
+            </form>
+          </div>
+        )
+      }
+      saveData1 = (event)=>{
+        this.setState({userId:event.target.value})
+      }
+      saveData2 = (event)=>{
+        this.setState({userPassword:event.target.value})
+      }
+      submitForm = (event)=>{
+        const {userId, userPassword} = this.state
+        event.preventDefault()
+        console.log(`您输入的账号为：${userId}您输入的密码为：${userPassword}`);
+      }
+    }
+    ReactDOM.render(<Person/>,document.getElementById('test'))
+  </script>
+</body>
+</html>

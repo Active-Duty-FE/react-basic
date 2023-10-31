@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <script type="text/javascript" src="../../js/react.development.js"></script>
+  <script type="text/javascript" src="../../js/react-dom.development.js"></script>
+  <script type="text/javascript" src="../../js/babel.min.js"></script>
+  <script type="text/javascript" src="../../js/prop-types.js"></script>
+  <script type="text/babel">
+    class Person extends React.Component {
+      static propTypes = {
+        name:PropTypes.string.isRequired,
+        gender:PropTypes.string,
+        age:PropTypes.number,
+        like:PropTypes.func
+      }
+      static defaultProps = {
+        gender:'男',
+        age:17,
+      }
+      render(){
+        const {name, gender, age} = this.props
+        return (
+          <ul>
+            <li>姓名：{name}</li>
+            <li>性別：{gender}</li>
+            <li>年龄：{age}</li>
+          </ul>
+        )
+      }
+    }
+    function like(){
+      console.log('like')
+    }
+    ReactDOM.render(<Person name="小王" age={18} like={like}/>,document.getElementById('test1'))
+    const p = {name:'小吴', gender:"女"}
+    ReactDOM.render(<Person {...p}/>,document.getElementById('test2'))
+ </script>
+</body>
+</html>
